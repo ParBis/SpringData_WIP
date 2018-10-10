@@ -1,0 +1,94 @@
+<div *ngIf="message!=''" class={{alertClass}} role="alert">
+  {{message}}
+</div>
+
+
+<div class="row mb-2 mt-2">
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Book</span>
+    <input #bookSearch (change)="0" type="text" class="form-control" aria-label="Book" 
+    aria-describedby="basic-addon1">
+  </div>
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Subject</span>
+    <input #subjectSearch (change)="0" type="text" class="form-control" aria-label="Subject" 
+    aria-describedby="basic-addon1">
+  </div>
+</div>
+
+<div class="row mb-2 mt-2">
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Volume</span>
+    <input #volumeSearch (change)="0" type="text" class="form-control" aria-label="Volume" 
+    aria-describedby="basic-addon1">
+  </div>
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Duration</span>
+    <input #durationSearch (change)="0" type="text" class="form-control" aria-label="Duration" 
+    aria-describedby="basic-addon1">
+  </div>
+</div>
+
+<!--div class="row mb-2">
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Priority From</span>
+    <input #priorityFromSearch (change)="0" type="text" class="form-control" aria-label="Priority From" 
+    aria-describedby="basic-addon1">
+  </div>
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Priority To</span>
+    <input #priorityToSearch (change)="0" type="text" class="form-control" aria-label="Priority To" 
+    aria-describedby="basic-addon1">
+  </div> 
+</div>
+
+<div class="row mb-2">
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Date From</span>
+    <input #dateFromSearch (change)="0" type="Date" class="form-control" aria-label="Date From" 
+    aria-describedby="basic-addon1" pattern="">
+  </div>
+  <div class="col-6 col-md-6 input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Date To</span>
+    <input #dateToSearch (change)="0" type="Date" class="form-control" aria-label="Date To" 
+    aria-describedby="basic-addon1" pattern="">
+  </div> 
+</div-->
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Book</th>
+      <th scope="col">Price</th>
+      <th scope="col">Volume</th>
+      <th scope="col">Publish Date</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Duration(Hrs)</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of books | filterTask: bookSearch.value:subjectSearch.value
+    :durationSearch.value:volumeSearch.value; let i= index">
+      <th scope="row">{{i+1}}</th>
+      <td><a class="nav-link active" routerLink="/edit/{{book.bookId}}">{{book.title}}</a></td>
+      <td>{{book.price}}</td>
+      <td>{{book.volume}}</td>
+      <td>{{book.stPublishDate}}</td>
+      <td>{{book.subtitle}}</td>
+      <td>{{book.durationInHours}}</td>
+
+      <td><button type="button" (click)="deleteBook(book.bookId)" class="btn btn-danger">Delete</button></td>
+      <!--td>
+        <ng-container *ngIf="task.taskStatus === 1; else else1">
+            <button type="button" (click)="updateTaskStatus(task.taskId)" class="btn btn-danger">End Task</button>
+        </ng-container>
+        <ng-template #else1>
+            <button type="button" class="btn btn-danger" disabled>End Task</button>
+        </ng-template>
+      </td-->
+    </tr>
+    
+  </tbody>
+</table>
